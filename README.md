@@ -28,7 +28,7 @@ The pipeline is modularly designed into five distinct phases:
 
 ---
 
-## 📊 Data Visualization & Insights
+## Data Visualization & Insights
 The pipeline doesn't just output a CSV; it generates automated reporting to help Product Managers and Support Leads identify trends at a glance.
 
 
