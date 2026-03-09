@@ -4,6 +4,7 @@ from src.ingest import load_data
 from src.clean import clean_app_reviews, clean_support_tickets, clean_nps_surveys
 from src.ai_enrichment import enrich_data
 from src.aggregate import build_merchant_360
+from src.visualize import generate_charts
 
 def run_pipeline():
     print("=== Starting Lightspeed Feedback Pipeline ===\n")
@@ -29,6 +30,10 @@ def run_pipeline():
     clean_reviews = clean_app_reviews(raw_reviews)
     clean_tickets = clean_support_tickets(raw_tickets)
     clean_nps = clean_nps_surveys(raw_nps)
+
+    clean_reviews.to_csv('data/processed/clean_reviews.csv', index=False)
+    clean_tickets.to_csv('data/processed/clean_tickets.csv', index=False)
+    clean_nps.to_csv('data/processed/clean_nps.csv', index=False)
     print("\n")
 
     # ---------------------------------------------------------
@@ -53,6 +58,8 @@ def run_pipeline():
     output_path = 'data/processed/merchant_360.csv'
     merchant_360_df.to_csv(output_path, index=False)
     print(f"\n=== Pipeline Complete! Unified dataset saved to {output_path} ===")
+
+    generate_charts('data/processed/merchant_360.csv')
     
     # Display a quick preview in the terminal for the reviewer
     print("\nPreview of Final Merchant 360 Dataset:")
